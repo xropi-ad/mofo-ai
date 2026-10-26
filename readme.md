@@ -12,6 +12,11 @@ Hands-on AI/ML experiments. Everything runs in one docker image
    `docker/build.sh` does a clean rebuild (no cache, fresh base image).
 3. `docker/run.py [command]` — starts the container (GPU, WSLg GUI, the repo
    at `~/mofo-ai`, your `~/.ssh`). No command: interactive bash.
+   - `/mount` = the host "root" of your cwd: the nearest folder above the cwd
+     with a file named `root`. The search stops at `~` (or `/` outside home).
+     No `root` file found: your cwd itself is mounted.
+   - Start folder: your cwd's place under `~/mofo-ai` when you are in the repo,
+     else its place under `/mount`.
 4. `docker/attach.sh` — another shell in the running container.
 
 VS Code: "Reopen in Container" uses `.devcontainer/` with the same image and mounts.
