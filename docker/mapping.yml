@@ -1,0 +1,18 @@
+# Extra mounts for run.py: "host:container".
+# Host paths are relative to the repo root; container paths are absolute.
+[
+  "docker/+mapped-folders/.local/bin:/home/vscode/.local/bin",
+  "docker/+mapped-folders/.local/share:/home/vscode/.local/share",
+  "docker/+mapped-folders/.config/ccx:/home/vscode/.config/ccx",
+  "docker/+mapped-folders/.config/cpx:/home/vscode/.config/cpx",
+  "docker/+mapped-folders/.config/dbx:/home/vscode/.config/dbx",
+  "docker/+mapped-folders/.config/edx:/home/vscode/.config/edx",
+  "docker/+mapped-folders/.config/gtx:/home/vscode/.config/gtx",
+  "docker/+mapped-folders/.config/hex:/home/vscode/.config/hex",
+  "docker/+mapped-folders/.config/searchx:/home/vscode/.config/searchx",
+  "docker/+mapped-folders/.config/syncx:/home/vscode/.config/syncx",
+  "docker/+mapped-folders/.config/trx:/home/vscode/.config/trx",
+  "docker/+mapped-folders/.config/wxl:/home/vscode/.config/wxl",
+  "docker/+mapped-folders/.custom-bashrc:/home/vscode/.custom-bashrc",
+  "docker/+mapped-folders/on-path-mapped:/home/vscode/on-path-mapped",
+]

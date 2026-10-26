@@ -1,0 +1,56 @@
+// Mounts mirror docker/mapping.yml and docker/run.py; keep them in sync.
+{
+  "name": "mofo-ai",
+  "image": "mofo-ai:latest",
+  "remoteUser": "vscode",
+  "updateRemoteUserUID": false,
+  "workspaceMount": "source=${localWorkspaceFolder},target=/home/vscode/mofo-ai,type=bind",
+  "workspaceFolder": "/home/vscode/mofo-ai",
+  "runArgs": [
+    "--gpus",
+    "all",
+    "--net",
+    "host",
+    "--ipc",
+    "host",
+    "--hostname",
+    "mofo-ai"
+  ],
+  "mounts": [
+    "source=${localEnv:HOME}/.ssh,target=/home/vscode/.ssh,type=bind",
+    "source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind",
+    "source=/mnt/wslg,target=/mnt/wslg,type=bind",
+    "source=${localWorkspaceFolder}/host,target=container,type=bind",
+    "source=${localWorkspaceFolder}/docker/+mapped-folders/.local/bin,target=/home/vscode/.local/bin,type=bind",
+    "source=${localWorkspaceFolder}/docker/+mapped-folders/.local/share,target=/home/vscode/.local/share,type=bind",
+    "source=${localWorkspaceFolder}/docker/+mapped-folders/.config/ccx,target=/home/vscode/.config/ccx,type=bind",
+    "source=${localWorkspaceFolder}/docker/+mapped-folders/.config/cpx,target=/home/vscode/.config/cpx,type=bind",
+    "source=${localWorkspaceFolder}/docker/+mapped-folders/.config/dbx,target=/home/vscode/.config/dbx,type=bind",
+    "source=${localWorkspaceFolder}/docker/+mapped-folders/.config/edx,target=/home/vscode/.config/edx,type=bind",
+    "source=${localWorkspaceFolder}/docker/+mapped-folders/.config/gtx,target=/home/vscode/.config/gtx,type=bind",
+    "source=${localWorkspaceFolder}/docker/+mapped-folders/.config/hex,target=/home/vscode/.config/hex,type=bind",
+    "source=${localWorkspaceFolder}/docker/+mapped-folders/.config/searchx,target=/home/vscode/.config/searchx,type=bind",
+    "source=${localWorkspaceFolder}/docker/+mapped-folders/.config/syncx,target=/home/vscode/.config/syncx,type=bind",
+    "source=${localWorkspaceFolder}/docker/+mapped-folders/.config/trx,target=/home/vscode/.config/trx,type=bind",
+    "source=${localWorkspaceFolder}/docker/+mapped-folders/.config/wxl,target=/home/vscode/.config/wxl,type=bind",
+    "source=${localWorkspaceFolder}/docker/+mapped-folders/.custom-bashrc,target=/home/vscode/.custom-bashrc,type=bind",
+    "source=${localWorkspaceFolder}/docker/+mapped-folders/on-path-mapped,target=/home/vscode/on-path-mapped,type=bind"
+  ],
+  "containerEnv": {
+    "DISPLAY": ":0",
+    "WAYLAND_DISPLAY": "wayland-0",
+    "XDG_RUNTIME_DIR": "/mnt/wslg/runtime-dir",
+    "PULSE_SERVER": "unix:/mnt/wslg/PulseServer"
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-toolsai.jupyter",
+        "ms-vscode.cpptools",
+        "ms-vscode.cmake-tools",
+        "llvm-vs-code-extensions.vscode-clangd"
+      ]
+    }
+  }
+}

@@ -1,4 +1,5 @@
 # Byte-compiled / optimized / DLL files
+**/+*
 __pycache__/
 *.py[codz]
 *$py.class
@@ -218,3 +219,26 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# CMake / build
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+
+# Compiled outputs
+*.o
+*.obj
+*.a
+*.lib
+*.dll
+*.exe
+
+# IDEs
+.vs/
+.vscode/
+*.user
+*.suo
+
+# OS
+.DS_Store
+Thumbs.db
