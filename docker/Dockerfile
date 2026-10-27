@@ -92,9 +92,6 @@ RUN mkdir -p ~/.ssh ~/.local/bin ~/.local/share ~/on-path-mapped \
     && printf '%s\n' '<c> Allen & Robert' > ~/xropi \
     && printf '%s\n' \
         '' \
-        '# xbuilds tools (install-local.sh into the mapped ~/.local) wire themselves here' \
-        '[ -r "$HOME/.local/share/dev-wxl.sh" ] && . "$HOME/.local/share/dev-wxl.sh"' \
-        '' \
         '# per-user customizations, mapped from mofo-ai/docker/+mapped-folders' \
         '[ -f "$HOME/.custom-bashrc" ] && . "$HOME/.custom-bashrc"' \
         >> ~/.bashrc
