@@ -1,1 +1,5 @@
-{}
+{
+  left_start_cwd: cwd,
+  right_start_cwd: cwd,
+}
+
