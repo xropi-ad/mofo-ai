@@ -88,7 +88,7 @@ def gui_args():
 
 
 def main():
-    cmd = ["docker", "run", "--rm", "--name", NAME, "--hostname", NAME,
+    cmd = ["docker", "run", "--rm", "--hostname", NAME,
            "--gpus", "all", "--net", "host", "--ipc", "host"]
     if sys.stdin.isatty():
         cmd.append("-it")

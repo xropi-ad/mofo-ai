@@ -17,7 +17,7 @@ Hands-on AI/ML experiments. Everything runs in one docker image
      No `root` file found: your cwd itself is mounted.
    - Start folder: your cwd's place under `~/mofo-ai` when you are in the repo,
      else its place under `/mount`.
-4. `docker/attach.sh` — another shell in the running container.
+4. `docker/attach.sh` — another shell in the newest running container.
 
 VS Code: "Reopen in Container" uses `.devcontainer/` with the same image and mounts.
 
