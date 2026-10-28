@@ -1,4 +1,4 @@
-// Mounts mirror docker/mapping.yml and docker/run.py; keep them in sync.
+// Mounts mirror docker/mapping-template.yml and docker/run.py; keep them in sync.
 {
   "name": "mofo-ai",
   "image": "mofo-ai:latest",

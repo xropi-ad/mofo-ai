@@ -4,7 +4,8 @@
 1. Docker Engine (Docker's apt repo), current user in the docker group.
 2. NVIDIA Container Toolkit, registered as a docker runtime (--gpus all).
 3. uv (run.py is a uv script).
-4. docker/mapped-folders-template -> docker/+mapped-folders, existing files kept.
+4. docker/mapping-template.yml -> docker/+mapping.yml, unless it exists.
+5. docker/mapped-folders-template -> docker/+mapped-folders, existing files kept.
 
 Every step is skipped when already done. Plain stdlib: runs before uv exists.
 """
@@ -18,6 +19,8 @@ from pathlib import Path
 docker_dir = Path(__file__).resolve().parent
 template_dir = docker_dir / "mapped-folders-template"
 mapped_dir = docker_dir / "+mapped-folders"
+mapping_template = docker_dir / "mapping-template.yml"
+mapping_file = docker_dir / "+mapping.yml"
 
 # Files that only exist so git keeps an otherwise empty folder.
 PLACEHOLDERS = {"dummy"}
@@ -106,6 +109,14 @@ def install_uv():
         sh("curl -LsSf https://astral.sh/uv/install.sh | sh")
 
 
+def copy_mapping():
+    if mapping_file.exists():
+        print("+mapping.yml: already exists, kept")
+    else:
+        shutil.copy2(mapping_template, mapping_file)
+        print(f"+mapping.yml: copied to {mapping_file}")
+
+
 def copy_mapped_folders():
     copied = 0
     for src in template_dir.rglob("*"):
@@ -125,6 +136,7 @@ def main():
     install_docker()
     install_nvidia_toolkit()
     install_uv()
+    copy_mapping()
     copy_mapped_folders()
     for note in notes:
         print(f"NOTE: {note}")

@@ -3,7 +3,7 @@
 # requires-python = ">=3.9"
 # dependencies = ["pyyaml"]
 # ///
-"""Start mofo-ai:latest with the repo, ~/.ssh, mapping.yml mounts, GPU and WSLg GUI.
+"""Start mofo-ai:latest with the repo, ~/.ssh, +mapping.yml mounts, GPU and WSLg GUI.
 
 The host "root" of the cwd is mounted at /mount: the nearest folder, walking up
 from the cwd, that holds a file named 'root'. The walk stops at ~ (or at / when
@@ -55,7 +55,10 @@ def mounts(mount_src):
     if ssh.is_dir():
         vols.append(f"{ssh}:{HOME_IN}/.ssh")
 
-    entries = yaml.safe_load((docker_dir / "mapping.yml").read_text()) or []
+    mapping_file = docker_dir / "+mapping.yml"
+    if not mapping_file.is_file():
+        sys.exit("docker/+mapping.yml missing (run docker/install.py)")
+    entries = yaml.safe_load(mapping_file.read_text()) or []
     missing = []
     for entry in entries:
         host, _, target = entry.rpartition(":")

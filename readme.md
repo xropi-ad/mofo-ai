@@ -23,7 +23,8 @@ VS Code: "Reopen in Container" uses `.devcontainer/` with the same image and mou
 
 ## Folder mapping
 
-`docker/mapping.yml` lists extra mounts as `"host:container"`.
+`docker/+mapping.yml` lists extra mounts as `"host:container"`.
+`install.py` creates it from `docker/mapping-template.yml`.
 
 - Host path: relative to the repo root.
 - Container path: absolute.
@@ -34,18 +35,20 @@ on exit): tool configs in `~/.config/*`, `~/.local`, `~/.custom-bashrc`,
 
 To add a mount:
 
-1. Add the line to `docker/mapping.yml`.
+1. Add the line to `docker/+mapping.yml` (and to `docker/mapping-template.yml` if it is for everyone).
 2. Add the folder or file to `docker/mapped-folders-template/`.
 3. Add the target to the `mkdir -p` in `docker/Dockerfile` (else docker creates it root-owned).
 4. Mirror it in `.devcontainer/devcontainer.json`.
 5. Re-run `docker/install.py`, then rebuild.
 
-## Why `+mapped-folders` is not tracked
+## Why `+mapped-folders` and `+mapping.yml` are not tracked
 
 The mapped content is per user: your aliases, tool configs, scripts.
 
 - `docker/mapped-folders-template/` (tracked) — the starting point.
 - `docker/+mapped-folders/` (git-ignored by the `**/+*` rule) — your copy.
+- `docker/mapping-template.yml` (tracked) → `docker/+mapping.yml` (git-ignored) — your mount list,
+  copied only when it does not exist yet.
 
 `install.py` copies the template into `+mapped-folders` and never overwrites
 an existing file. So you can customize your container freely, without changing
