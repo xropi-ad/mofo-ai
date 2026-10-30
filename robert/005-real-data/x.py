@@ -2,13 +2,15 @@
 
 import torch as t
 from torch import nn
-
-dev = "cuda" if t.cuda.is_available() else "cpu"
+from torch.utils.data import TensorDataset, DataLoader
 
 t.manual_seed(0)    # to make it deterministic
+dev = "cuda" if t.cuda.is_available() else "cpu"
+
+    
+
 
 # One trap: nn.Linear expects input shape [batch, features]. Your x has shape [4]. It needs shape [4, 1]: 4 samples, 1 feature each. The same holds for y.
-x = t.tensor([[0.], [1], [2], [3]])
 x = t.linspace(-2, 2, 50).reshape(50, 1)
 y = x**2
 
@@ -26,14 +28,19 @@ y = y.to(dev)
 #model = model.to(dev)
 model.to(dev)    # works in place for model
 
+ds = TensorDataset(x, y)
+dl = DataLoader(ds, batch_size=10, shuffle=True)
+
 opt = t.optim.SGD(model.parameters(), lr=0.1)
 
-for i in range(2000):
-    pred = model(x)
-    loss = loss_fn(pred, y)
-    loss.backward()
-    opt.step()
-    opt.zero_grad()
+for i in range(400):
+    for xb, yb in dl:
+        pred = model(xb)
+        loss = loss_fn(pred, yb)
+        loss.backward()
+        opt.step()
+        opt.zero_grad()
+
 #print(f"loss = {loss}   model.parameters: {model.weight.item()} {model.bias.item()}")
 print(f"loss = {loss}")
 with t.no_grad():
